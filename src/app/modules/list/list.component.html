@@ -1,0 +1,12 @@
+<div class="list-container">
+  <mat-form-field floatLabel="never">
+    <input matInput placeholder="Search" [(ngModel)]="searchText" placeholder="Enter text to search" 
+    autofocus type="text">
+  </mat-form-field>
+  
+  <mat-selection-list #shoes [multiple]="false">
+    <mat-list-option *ngFor="let category of categories | categoryFilter: searchText" [value]="category">
+      {{category}}
+    </mat-list-option>
+  </mat-selection-list>
+</div>

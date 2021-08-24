@@ -1,0 +1,41 @@
+<form [formGroup]="formGroup" autocomplete="off">
+<table mat-table [dataSource]="dataSource" class="table" width="100%">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="first">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <mat-form-field floatLabel="never">
+            <input (change)="onChangeEvent($event)" matInput placeholder="Number" formControlName="value" type="number">
+        </mat-form-field>
+      </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="second">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <mat-form-field floatLabel="never">
+            <mat-select placeholder="format" [(value)]="defaultFormat" formControlName="format">
+                <mat-option value="isPrime">isPrime</mat-option>
+                <mat-option value="IsFibanacci">IsFibanacci</mat-option>
+              </mat-select>
+        </mat-form-field>
+      </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="third">
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let element">
+            <span *ngIf="formGroup.get('format')?.value === 'isPrime'">{{isPrime}}</span>
+            <span *ngIf="formGroup.get('format')?.value === 'IsFibanacci'">{{isFibanacci}}</span>
+      </td>
+    </ng-container>
+
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</form>
